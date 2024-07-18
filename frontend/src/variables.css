@@ -1,6 +1,6 @@
 :root {
-    --primary-color: #071952;
-    --primary-button-color: #4E5DD2;
-    --secondary-button-color: #D8D8D8;
-    --danger-button-color: #D90429;
+    --primary-color: rgb(7, 25, 82);
+    --primary-button-color: rgb(78, 93, 210);
+    --secondary-button-color: rgb(216, 216, 216);
+    --danger-button-color: rgb(217, 4, 41);
 }
