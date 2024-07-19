@@ -1,0 +1,38 @@
+body {
+    margin-top: 5rem;
+}
+
+.wrapper-home-page {
+    margin: 0 auto;
+    padding: 1rem;
+    max-width: 1200px;
+}
+
+.text-header-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Ensure it takes up the full width for centering */
+    text-align: center; /* Center text content */
+}
+
+
+@media (max-width: 1200px) {
+    .wrapper-home-page {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper-home-page {
+        padding: 0.5rem; /* Reduce padding on smaller screens */
+    }
+
+    .wrapper-home-page .Stack {
+        h: auto; /* Adjust height of Stack to be auto on smaller screens */
+    }
+}

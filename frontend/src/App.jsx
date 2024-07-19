@@ -3,10 +3,11 @@ import './App.css'
 import NavigationBar from "./components/NavigationBar/NavigationBar.jsx";
 import Logo from "./components/Logo/Logo.jsx";
 import CustomInput from "./components/CustomInput/CustomInput.jsx";
-import {MantineProvider} from '@mantine/core';
+import {MantineProvider, Grid} from '@mantine/core';
 import CustomButton from "./components/CustomButton/CustomButton.jsx";
 import getCssVariableValue from "./utils/getcsscolor.js";
 import {Router, Link} from "react-router-dom";
+import '@mantine/core/styles.css';
 
 function App() {
     const primaryColor = getCssVariableValue("--primary-color")
@@ -24,7 +25,8 @@ function App() {
                         <CustomInput label="Password" placeholder="Type your password"/>
                     </div>
                     <div className="button-box">
-                        <CustomButton color={primaryColor} isFullWidth={true} buttonText="Login"/>
+                        <Link to="/homepage-student"><CustomButton color={primaryColor} isFullWidth={true}
+                                                                   buttonText="Login"/></Link>
                     </div>
                     <span>Don't have an account? <Link to="/register">Register here</Link></span>
                 </div>

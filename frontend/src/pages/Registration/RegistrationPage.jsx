@@ -6,12 +6,17 @@ import {MantineProvider} from '@mantine/core';
 import CustomButton from "../../components/CustomButton/CustomButton.jsx";
 import CustomInput from "../../components/CustomInput/CustomInput.jsx";
 import getCssVariableValue from "../../utils/getcsscolor.js";
+import {Link} from "react-router-dom";
+
 function RegistrationPage() {
     const primaryColor = getCssVariableValue("--primary-color")
+    const primaryButtonColor = getCssVariableValue("--primary-button-color")
+    const secondaryButtonColor = getCssVariableValue("--secondary-button-color")
+
     return (
         <MantineProvider>
-            <NavigationBar />
-            <Logo />
+            <NavigationBar/>
+            <Logo/>
             <div className="wrapper">
                 <div className="wrapper-registration">
                     <div className="input-box">
@@ -30,9 +35,9 @@ function RegistrationPage() {
                         <CustomInput label="Confirm Password" placeholder="Retype your password"/>
                     </div>
                     <div className="button-box">
-                        <CustomButton color={primaryColor} isFullWidth={true} buttonText="Login"/>
+                        <Link to="/homepage-student"><CustomButton color={primaryButtonColor} isFullWidth={false} buttonText="Create Account"/> </Link>
+                        <Link to="/"><CustomButton color={secondaryButtonColor} isFullWidth={false} buttonText="Back"/> </Link>
                     </div>
-                    <span>Don't have an account? <a>Register here</a> </span>
                 </div>
             </div>
         </MantineProvider>
