@@ -1,0 +1,17 @@
+/*TODO THINK OF EXTRACTING THIS KNOWLEDGER*/
+
+body {
+    margin-top: 5rem;
+}
+
+.text-button-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1.5rem;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 4rem;
+}
