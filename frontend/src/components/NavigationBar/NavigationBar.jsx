@@ -1,5 +1,5 @@
 import React from "react";
-import "./NavigationBar.module.css";
+import "./NavigationBar.css";
 
 function NavigationBar({role = "student"}) {
     return (

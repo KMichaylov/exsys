@@ -6,20 +6,17 @@ body {
     margin: 0 auto;
     padding: 1rem;
     max-width: 1200px;
+    text-align: center; /* Center text within the wrapper */
 }
 
 .text-header-wrapper {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%; /* Ensure it takes up the full width for centering */
-    text-align: center; /* Center text content */
+    width: 100%;
+    text-align: center;
+    margin-bottom: 4rem; /* Add some space below the header */
 }
-
 
 @media (max-width: 1200px) {
     .wrapper-home-page {
@@ -33,6 +30,6 @@ body {
     }
 
     .wrapper-home-page .Stack {
-        h: auto; /* Adjust height of Stack to be auto on smaller screens */
+        height: auto; /* Adjust height of Stack to be auto on smaller screens */
     }
 }

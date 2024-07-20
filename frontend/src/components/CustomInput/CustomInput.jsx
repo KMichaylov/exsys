@@ -1,6 +1,6 @@
 import {Input} from "@mantine/core";
 import React from 'react';
-import './CustomInput.module.css';
+import './CustomInput.css';
 
 function CustomInput({ label, error, description, placeholder }) {
     return (
