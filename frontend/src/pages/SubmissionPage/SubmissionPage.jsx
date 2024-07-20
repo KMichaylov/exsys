@@ -3,6 +3,7 @@ import {Box, MantineProvider, Text} from "@mantine/core";
 import CustomButton from "../../components/CustomButton/CustomButton.jsx";
 import getCssVariableValue from "../../utils/getcsscolor.js";
 import "./SubmissionPage.css";
+import NavigationBar from "../../components/NavigationBar/NavigationBar.jsx";
 
 function SubmissionPage() {
     const primaryButtonColor = getCssVariableValue("--primary-button-color");
@@ -11,6 +12,7 @@ function SubmissionPage() {
 
     return (
         <MantineProvider>
+            <NavigationBar/>
             <Box className="container" style={{backgroundColor: backgroundColor}}>
                 <Text className="header">SUBMISSION</Text>
                 <Text className="message">
