@@ -1,5 +1,6 @@
 :root {
     --primary-color: rgb(7, 25, 82);
+    --box-color: rgb(249, 242, 242);
     --primary-button-color: rgb(78, 93, 210);
     --secondary-button-color: rgb(216, 216, 216);
     --danger-button-color: rgb(217, 4, 41);

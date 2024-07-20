@@ -8,10 +8,12 @@ import TextBox from "../../components/TextBox/TextBox.jsx";
 import getCssVariableValue from "../../utils/getcsscolor.js";
 import CustomButton from "../../components/CustomButton/CustomButton.jsx";
 import "./HomePage.css"
+import {Link} from "react-router-dom";
 
 function HomePage({}) {
     const primaryButtonColor = getCssVariableValue("--primary-button-color");
     const primaryColor = getCssVariableValue("--primary-color");
+    const boxColor = getCssVariableValue("--box-color");
 
     return (
         <MantineProvider>
@@ -25,12 +27,13 @@ function HomePage({}) {
                         <Stack align="stretch">
                             <Text>Courses</Text>
                             <SearchInput placeholder={"Please enter the course name"} label={"Course Name"}/>
-                            <TextBox buttonText={"Go To Exam"} buttonColor={primaryButtonColor}
-                                     descriptionText={"CALCULUS A"}/>
-                            <TextBox buttonText={"Go To Exam"} buttonColor={primaryButtonColor}
-                                     descriptionText={"CALCULUS B"}/>
-                            <TextBox buttonText={"Go To Exam"} buttonColor={primaryButtonColor}
-                                     descriptionText={"Programming Methods"}/>
+                            <Link style={{ textDecoration: 'none' }} to={"/exam-selection"}><TextBox buttonText={"Go To Exam"}
+                                                                  buttonColor={primaryButtonColor}
+                                                                  descriptionText={"CALCULUS A"}/></Link>
+                            <Link style={{ textDecoration: 'none' }} to={"/"}><TextBox buttonText={"Go To Exam"} buttonColor={primaryButtonColor}
+                                                    descriptionText={"CALCULUS B"}/></Link>
+                            <Link style={{ textDecoration: 'none' }} to={"/"}><TextBox buttonText={"Go To Exam"} buttonColor={primaryButtonColor}
+                                                    descriptionText={"Programming Methods"}/></Link>
                         </Stack>
                     </Grid.Col>
                     <Grid.Col span={6} style={{paddingLeft: '5.5rem'}}>
