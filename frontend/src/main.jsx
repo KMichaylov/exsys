@@ -9,8 +9,8 @@ import ExamSelectionPage from "./pages/StudentPages/ExamSelectionPage/ExamSelect
 import ExamPage from "./pages/StudentPages/ExamPage/ExamPage.jsx";
 import SubmissionPage from "./pages/StudentPages/SubmissionPage/SubmissionPage.jsx";
 import ExamPageTeacher from "./pages/TeacherPages/ExamPageTeacher/ExamPageTeacher.jsx";
-import SubmittedExamsPage from "./pages/TeacherPages/SubmittedExamsPage/SubmittedExamsPage.jsx";
-import StatisticsPage from "./pages/TeacherPages/StatisticsPage/StatisticsPage.jsx";
+// import StatisticsPage from "./pages/TeacherPages/StatisticsPage/StatisticsPage.jsx";
+import ExamGradingPage from "./pages/TeacherPages/ExamGradingPage/ExamGradingPage.jsx";
 
 const router = createBrowserRouter([{path: "/", element: <App/>}, {
     path: "/register",
@@ -19,8 +19,9 @@ const router = createBrowserRouter([{path: "/", element: <App/>}, {
     path: "/exam-selection", element: <ExamSelectionPage/>
 }, {path: "/exam-calculus-A", element: <ExamPage/>}, {path: "/submission-page", element: <SubmissionPage/>}, {
     path: "/exam-page-teacher", element: <ExamPageTeacher/>
-}, {path: "/submitted-exams", element: <SubmittedExamsPage/>},
-    {path: "/statistics-page", element: <StatisticsPage/>}
+},
+    {path: "/submitted-exams", element: <ExamGradingPage/>},
+    // {path: "/statistics-page", element: <StatisticsPage/>}
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
