@@ -1,0 +1,12 @@
+#card-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-button-color);
+    border-radius: 10px;
+    padding: 20px;
+    gap: 10px;
+}
+
+.kpi-text {
+    color: white;
+}
