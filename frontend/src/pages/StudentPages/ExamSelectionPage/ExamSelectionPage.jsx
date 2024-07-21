@@ -1,4 +1,3 @@
-import react from 'React'
 import getCssVariableValue from "../../../utils/getcsscolor.js";
 import {Grid, MantineProvider, Stack, Text} from "@mantine/core";
 import NavigationBar from "../../../components/NavigationBar/NavigationBar.jsx";
