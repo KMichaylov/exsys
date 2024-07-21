@@ -1,5 +1,6 @@
 import {Button} from '@mantine/core';
 import React from 'react';
+import "./CustomButton.css"
 
 function CustomButton({color, isFullWidth = false, buttonText}) {
     return (

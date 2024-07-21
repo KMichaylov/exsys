@@ -11,6 +11,7 @@ import "./HomePage.css"
 import {Link} from "react-router-dom";
 
 function HomePage({}) {
+    // TODO: Export those into a separate file!!!
     const primaryButtonColor = getCssVariableValue("--primary-button-color");
     const primaryColor = getCssVariableValue("--primary-color");
     const boxColor = getCssVariableValue("--box-color");

@@ -6,7 +6,7 @@ body {
     margin: 0 auto;
     padding: 1rem;
     max-width: 1200px;
-    text-align: center; /* Center text within the wrapper */
+    text-align: center;
 }
 
 .text-header-wrapper {
@@ -15,7 +15,7 @@ body {
     align-items: center;
     width: 100%;
     text-align: center;
-    margin-bottom: 4rem; /* Add some space below the header */
+    margin-bottom: 4rem;
 }
 
 @media (max-width: 1200px) {
@@ -26,10 +26,10 @@ body {
 
 @media (max-width: 768px) {
     .wrapper-home-page {
-        padding: 0.5rem; /* Reduce padding on smaller screens */
+        padding: 0.5rem;
     }
 
     .wrapper-home-page .Stack {
-        height: auto; /* Adjust height of Stack to be auto on smaller screens */
+        height: auto;
     }
 }

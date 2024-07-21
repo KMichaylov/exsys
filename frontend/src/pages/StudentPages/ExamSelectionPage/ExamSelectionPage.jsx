@@ -1,11 +1,10 @@
 import react from 'React'
-import getCssVariableValue from "../../utils/getcsscolor.js";
+import getCssVariableValue from "../../../utils/getcsscolor.js";
 import {Grid, MantineProvider, Stack, Text} from "@mantine/core";
-import NavigationBar from "../../components/NavigationBar/NavigationBar.jsx";
-import HeadingText from "../../components/HeadingText/HeadingText.jsx";
-import SearchInput from "../../components/SearchInput/SearchInput.jsx";
-import TextBox from "../../components/TextBox/TextBox.jsx";
-import CustomButton from "../../components/CustomButton/CustomButton.jsx";
+import NavigationBar from "../../../components/NavigationBar/NavigationBar.jsx";
+import HeadingText from "../../../components/HeadingText/HeadingText.jsx";
+import SearchInput from "../../../components/SearchInput/SearchInput.jsx";
+import TextBox from "../../../components/TextBox/TextBox.jsx";
 import React from "react";
 import {Link} from "react-router-dom";
 
@@ -25,7 +24,7 @@ function ExamSelectionPage() {
                         <Stack align="stretch">
                             <Text size={"lg"}>Exams</Text>
                             <SearchInput placeholder={"Please enter the exam name"} label={"Exam Name"}/>
-                            <Link style={{textDecoration: 'none'}} to={"/"}><TextBox
+                            <Link style={{textDecoration: 'none'}} to={"/exam-calculus-A"}><TextBox
                                 buttonText={"Go To Exam"}
                                 buttonColor={primaryButtonColor}
                                 descriptionText={"Calculus A / Resit exam \n" +
