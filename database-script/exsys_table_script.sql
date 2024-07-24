@@ -64,7 +64,7 @@ CREATE TABLE question
     question_id        SERIAL PRIMARY KEY,
     exam_id            INT,
     question_body      VARCHAR                                                NOT NULL,
-    question_type      VARCHAR(15) CHECK (question_type IN ('multiple_choice', 'multiple_correct',
+    question_type      VARCHAR(15) CHECK (question_type IN ('single_correct', 'multiple_correct',
                                                             'open_question')) NOT NULL,
     points             real,
     parent_question_id INT,
