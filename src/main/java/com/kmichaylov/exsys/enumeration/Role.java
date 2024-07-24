@@ -1,6 +1,6 @@
 package com.kmichaylov.exsys.enumeration;
 
-public enum Roles {
+public enum Role {
     TEACHER,
     STUDENT
 }
