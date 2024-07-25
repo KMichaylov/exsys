@@ -5,6 +5,8 @@ import com.kmichaylov.exsys.dto.RegistrationDTO;
 import com.kmichaylov.exsys.enumeration.Role;
 import com.kmichaylov.exsys.model.Person;
 import com.kmichaylov.exsys.service.PersonService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -12,31 +14,27 @@ import java.util.Optional;
 @RestController
 public class PersonRestController {
 
-    private PersonService personService;
+    private final PersonService personService;
 
     public PersonRestController(PersonService personService) {
         this.personService = personService;
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody RegistrationDTO registrationDTO) {
-        Person person = new Person();
-        person.setFullName(registrationDTO.getFullName());
-        person.setEmail(registrationDTO.getEmail());
-        person.setPassword(registrationDTO.getPassword());
-        person.setRole(Role.STUDENT);
-        personService.registerPerson(person);
-       return "Successful registration of person";
+    public ResponseEntity<Person> register(@RequestBody RegistrationDTO registrationDTO) {
+
+        Person registeredPerson = personService.registerPerson(registrationDTO);
+        return ResponseEntity.ok(registeredPerson);
 
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginDTO loginDTO) {
-        Optional<Person> person = personService.login(loginDTO.getEmail(), loginDTO.getPassword());
+    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
+        Optional<Person> person = personService.login(loginDTO);
         if (person.isPresent()) {
-            return "Login successful";
+            return ResponseEntity.ok("Successful Login!");
         }
-        return "Invalid credentials";
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
 

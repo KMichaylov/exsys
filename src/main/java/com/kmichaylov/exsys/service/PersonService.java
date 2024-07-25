@@ -1,6 +1,9 @@
 package com.kmichaylov.exsys.service;
 
 import com.kmichaylov.exsys.dao.PersonDAO;
+import com.kmichaylov.exsys.dto.LoginDTO;
+import com.kmichaylov.exsys.dto.RegistrationDTO;
+import com.kmichaylov.exsys.enumeration.Role;
 import com.kmichaylov.exsys.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,25 +35,34 @@ public class PersonService {
     /**
      * Service to register a person
      *
-     * @param person the object of the person
+     * @param registrationDTO the dto object of the person to be registered
+     * @return the created person object from the dto
      */
-    public void registerPerson(Person person) {
-        person.setPassword(passwordEncoder.encode(person.getPassword()));
+    public Person registerPerson(RegistrationDTO registrationDTO) {
+        Person person = new Person();
+        person.setFullName(registrationDTO.getFullName());
+        person.setEmail(registrationDTO.getEmail());
+        person.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
+        person.setRole(Role.STUDENT);
+
         personDAO.save(person);
         System.out.println("Successfully registered the person");
+        return person;
     }
 
     /**
      * Service to let an existing person to log-in
      *
-     * @param email    the email of the person
-     * @param password the password of the user (not hashed)
+     * @param loginDTO the dto containing login details
      * @return the person entity or empty if not registered
      */
 
-    public Optional<Person> login(String email, String password) {
+    public Optional<Person> login(LoginDTO loginDTO) {
+        String email = loginDTO.getEmail();
+        String password = loginDTO.getPassword();
+        String passwordFromDB = passwordEncoder.encode(password);
         Person person = personDAO.findByEmail(email);
-        if (person != null && passwordEncoder.matches(password, person.getPassword())) {
+        if (!email.isEmpty() && passwordEncoder.matches(password, passwordFromDB)) {
             return Optional.of(person);
         }
 
