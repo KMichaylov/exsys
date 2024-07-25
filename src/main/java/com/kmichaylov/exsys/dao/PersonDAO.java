@@ -40,6 +40,15 @@ public interface PersonDAO {
      */
     List<Person> findByFullName(String fullName);
 
+
+    /**
+     * Finds person entities by their full name.
+     *
+     * @param email of the person
+     * @return the person entity with the given email
+     */
+    Person findByEmail(String email);
+
     /**
      * Updates an existing person entity.
      *

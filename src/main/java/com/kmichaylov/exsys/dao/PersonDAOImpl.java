@@ -85,6 +85,19 @@ public class PersonDAOImpl implements PersonDAO {
         return query.getResultList();
     }
 
+
+    /**
+     * Find the person with the corresponding email address.
+     * @param email of the person
+     * @return the person entity
+     */
+    @Override
+    public Person findByEmail(String email) {
+        TypedQuery<Person> query = entityManager.createQuery("FROM Person WHERE email=:email", Person.class);
+        query.setParameter("email", email);
+        return query.getSingleResult();
+    }
+
     /**
      * Updates an existing person entity.
      *
