@@ -12,16 +12,12 @@ public class Person {
     @Column(name = "person_id")
     private String personId;
     @Column(name = "full_name")
-    @NotBlank(message = "Full name is mandatory")
     private String fullName;
     @Column(name = "email")
-    @NotBlank(message = "Email is mandatory")
     private String email;
     @Column(name = "password")
-    @NotBlank(message = "Password is mandatory")
     private String password;
     @Column(name = "role")
-    @NotBlank(message = "Role is mandatory")
     private Role role;
 
     public Person() {
