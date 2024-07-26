@@ -1,41 +1,11 @@
 CREATE TABLE IF NOT EXISTS person
 (
-    person_id VARCHAR(8) UNIQUE,
+    person_id SERIAL PRIMARY KEY,
     full_name VARCHAR                                           NOT NULL,
     email     VARCHAR                                           NOT NULL,
     password  VARCHAR                                           NOT NULL,
-    role      VARCHAR(7) CHECK (role IN ('student', 'teacher')) NOT NULL,
-    PRIMARY KEY (person_id)
+    role      VARCHAR(7) CHECK (role IN ('STUDENT', 'TEACHER')) NOT NULL
 );
-
-CREATE SEQUENCE s_seq START 0 INCREMENT 1 MINVALUE 0 MAXVALUE 9999999 CYCLE;
-CREATE SEQUENCE t_seq START 0 INCREMENT 1 MINVALUE 0 MAXVALUE 9999999 CYCLE;
-
-CREATE OR REPLACE FUNCTION generate_person_id()
-    RETURNS TRIGGER AS
-$$
-DECLARE
-    new_id VARCHAR(8);
-BEGIN
-    IF NEW.person_id IS NULL THEN
-        IF NEW.role = 'student' THEN
-            new_id := 's' || LPAD(nextval('s_seq')::text, 7, '0');
-        ELSIF NEW.role = 'teacher' THEN
-            new_id := 't' || LPAD(nextval('t_seq')::text, 7, '0');
-        ELSE
-            RAISE EXCEPTION 'Invalid role. Must be ''student'' or ''teacher''';
-        END IF;
-        NEW.person_id := new_id;
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER set_person_id
-    BEFORE INSERT
-    ON person
-    FOR EACH ROW
-EXECUTE FUNCTION generate_person_id();
 
 CREATE TABLE course
 (
@@ -50,7 +20,7 @@ CREATE TABLE exam
     course_id      INT     NOT NULL,
     date           DATE,
     duration       INT     NOT NULL,
-    type           VARCHAR(10) CHECK (type IN ('regular', 'resit')),
+    type           VARCHAR(10) CHECK (type IN ('REGULAR', 'RESIT')),
     description    VARCHAR,
     points_to_pass REAL    NOT NULL,
     total_points   REAL    NOT NULL,
@@ -63,10 +33,9 @@ CREATE TABLE question
 (
     question_id        SERIAL PRIMARY KEY,
     exam_id            INT,
-    question_body      VARCHAR                                                NOT NULL,
-    question_type      VARCHAR(15) CHECK (question_type IN ('single_correct', 'multiple_correct',
-                                                            'open_question')) NOT NULL,
-    points             real,
+    question_body      VARCHAR                                                                                      NOT NULL,
+    question_type      VARCHAR(15) CHECK (question_type IN ('SINGLE_CORRECT', 'MULTIPLE_CORRECT', 'OPEN_QUESTION')) NOT NULL,
+    points             REAL,
     parent_question_id INT,
     FOREIGN KEY (exam_id) REFERENCES exam (exam_id),
     FOREIGN KEY (parent_question_id) REFERENCES question (question_id)
@@ -84,7 +53,7 @@ CREATE TABLE answer
 CREATE TABLE student_exam
 (
     student_exam_id SERIAL PRIMARY KEY,
-    student_id      VARCHAR(8),
+    student_id      INT,
     exam_id         INT,
     obtained_points REAL    NOT NULL,
     exam_passed     BOOLEAN NOT NULL,
@@ -95,7 +64,7 @@ CREATE TABLE student_exam
 CREATE TABLE student_answer
 (
     student_answer_id SERIAL PRIMARY KEY,
-    student_id        VARCHAR(8),
+    student_id        INT,
     question_id       INT,
     exam_id           INT,
     answer_id         INT,

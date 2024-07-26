@@ -2,14 +2,13 @@ package com.kmichaylov.exsys.model;
 
 import com.kmichaylov.exsys.enumeration.Role;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "person")
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "person_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "person_id", updatable = false, nullable = false)
     private String personId;
     @Column(name = "full_name")
     private String fullName;
@@ -18,6 +17,7 @@ public class Person {
     @Column(name = "password")
     private String password;
     @Column(name = "role")
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public Person() {
