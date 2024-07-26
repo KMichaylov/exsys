@@ -7,11 +7,26 @@ import CustomButton from "../../components/CustomButton/CustomButton.jsx";
 import CustomInput from "../../components/CustomInput/CustomInput.jsx";
 import getCssVariableValue from "../../utils/getcsscolor.js";
 import {Link} from "react-router-dom";
+import CustomForm from "../../components/CustomForm/CustomForm.jsx";
+import {registrationConfig} from "../../utils/formConfigurer.js";
 
 function RegistrationPage() {
-    const primaryColor = getCssVariableValue("--primary-color")
     const primaryButtonColor = getCssVariableValue("--primary-button-color")
     const secondaryButtonColor = getCssVariableValue("--secondary-button-color")
+
+
+    const buttonConfig = [
+        {
+            buttonText: "Back",
+            buttonColor: secondaryButtonColor,
+            buttonIsFullWidth: false,
+            link: "/"
+        }, {
+            buttonText: "Submit",
+            buttonColor: primaryButtonColor,
+            buttonIsFullWidth: false,
+            link: "/homepage-student"
+        }]
 
     return (
         <MantineProvider>
@@ -19,25 +34,10 @@ function RegistrationPage() {
             <Logo/>
             <div className="wrapper">
                 <div className="wrapper-registration">
-                    <div className="input-box">
-                        <CustomInput label="Full Name" placeholder="Type your full name"/>
-                    </div>
-                    <div className="input-box">
-                        <CustomInput label="Student Number" placeholder="Type your student number"/>
-                    </div>
-                    <div className="input-box">
-                        <CustomInput label="Email" placeholder="Type your email"/>
-                    </div>
-                    <div className="input-box">
-                        <CustomInput label="Password" placeholder="Type your password"/>
-                    </div>
-                    <div className="input-box">
-                        <CustomInput label="Confirm Password" placeholder="Retype your password"/>
-                    </div>
-                    <div className="button-box">
-                        <Link to="/homepage-student"><CustomButton color={primaryButtonColor} isFullWidth={false} buttonText="Create Account"/> </Link>
-                        <Link to="/"><CustomButton color={secondaryButtonColor} isFullWidth={false} buttonText="Back"/> </Link>
-                    </div>
+                    <CustomForm buttonConfig={buttonConfig}
+                                initialValues={{email: '', fullName: '', password: '', confirmPassword: ''}}
+                                onSubmit={() => "0"}
+                                fields={registrationConfig}/>
                 </div>
             </div>
         </MantineProvider>

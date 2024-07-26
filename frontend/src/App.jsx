@@ -13,6 +13,12 @@ function App() {
     const primaryColor = getCssVariableValue("--primary-color");
     console.log(primaryColor);
 
+    const buttonConfig = [{
+        buttonText: "Submit",
+        buttonColor: primaryColor,
+        buttonIsFullWidth: true,
+        link: "/homepage-student"
+    }]
     return (
         <MantineProvider>
             <NavigationBar/>
@@ -20,11 +26,9 @@ function App() {
             <div className="wrapper">
                 <div className="wrapper-registration">
                     <CustomForm
-                        link={"/homepage-student"}
                         fields={loginConfig}
                         onSubmit={() => "0"}
-                        buttonColor={primaryColor}
-                        buttonIsFullWidth={true}
+                        buttonConfig={buttonConfig}
                         initialValues={{email: '', password: ''}}
                     />
                     <span>Don't have an account? <Link to="/register">Register here</Link></span>
