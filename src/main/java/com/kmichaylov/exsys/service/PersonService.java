@@ -59,10 +59,13 @@ public class PersonService {
 
     public Optional<Person> login(LoginDTO loginDTO) {
         String email = loginDTO.getEmail();
-        String password = loginDTO.getPassword();
-        String passwordFromDB = passwordEncoder.encode(password);
+        String passwordInput = loginDTO.getPassword();
+        String passwordFromDB = personDAO.findByEmail(email).getPassword();
         Person person = personDAO.findByEmail(email);
-        if (!email.isEmpty() && passwordEncoder.matches(password, passwordFromDB)) {
+        System.out.println(passwordInput);
+        System.out.println(passwordFromDB);
+        System.out.println(email);
+        if (!email.isEmpty() && passwordEncoder.matches(passwordInput, passwordFromDB)) {
             return Optional.of(person);
         }
 

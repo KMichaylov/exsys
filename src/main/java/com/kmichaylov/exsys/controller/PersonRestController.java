@@ -3,6 +3,7 @@ package com.kmichaylov.exsys.controller;
 import com.kmichaylov.exsys.dto.LoginDTO;
 import com.kmichaylov.exsys.dto.RegistrationDTO;
 import com.kmichaylov.exsys.enumeration.Role;
+import com.kmichaylov.exsys.exception.PersonNotFoundException;
 import com.kmichaylov.exsys.model.Person;
 import com.kmichaylov.exsys.service.PersonService;
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,7 @@ public class PersonRestController {
         if (person.isPresent()) {
             return ResponseEntity.ok("Successful Login!");
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        throw new PersonNotFoundException("Student not found. Check your email and password. First register if you don't have an account!");
     }
 
 
