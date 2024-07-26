@@ -3,10 +3,7 @@ import '../../App.css'
 import NavigationBar from "../../components/NavigationBar/NavigationBar.jsx";
 import Logo from "../../components/Logo/Logo.jsx";
 import {MantineProvider} from '@mantine/core';
-import CustomButton from "../../components/CustomButton/CustomButton.jsx";
-import CustomInput from "../../components/CustomInput/CustomInput.jsx";
 import getCssVariableValue from "../../utils/getcsscolor.js";
-import {Link} from "react-router-dom";
 import CustomForm from "../../components/CustomForm/CustomForm.jsx";
 import {registrationConfig} from "../../utils/formConfigurer.js";
 
