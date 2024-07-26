@@ -1,13 +1,17 @@
 import {PasswordInput} from '@mantine/core';
 
-function CustomPasswordInput({size, label, placeholder, description}) {
+function CustomPasswordInput({name, error, label, placeholder, description, onChange, value}) {
     return (<PasswordInput
-        size={size}
+        name={name}
+        size="md"
         radius="md"
         label={label}
         withAsterisk
+        error={error}
         description={description}
         placeholder={placeholder}
+        onChange={onChange}
+        value={value}
     />);
 }
 

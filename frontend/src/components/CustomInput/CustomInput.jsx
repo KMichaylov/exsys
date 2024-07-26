@@ -2,7 +2,7 @@ import {Input} from "@mantine/core";
 import React from 'react';
 import './CustomInput.css';
 
-function CustomInput({ label, error, description, placeholder }) {
+function CustomInput({name, label, error, description, placeholder, onChange, value}) {
     return (
         <Input.Wrapper
             className="custom-input"
@@ -13,7 +13,7 @@ function CustomInput({ label, error, description, placeholder }) {
             description={description}
             error={error}
         >
-            <Input className="input-field" size="md" placeholder={placeholder} />
+            <Input className="input-field" size="md" name={name} onChange={onChange} placeholder={placeholder} value={value}/>
         </Input.Wrapper>
     );
 }

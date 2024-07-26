@@ -7,7 +7,7 @@ import CustomForm from "./components/CustomForm/CustomForm.jsx";
 import getCssVariableValue from "./utils/getcsscolor.js";
 import {Link} from "react-router-dom";
 import '@mantine/core/styles.css';
-import {loginConfig} from "./utils/formConfigurer.js"; // Corrected path
+import {loginConfig} from "./utils/formConfigurer.js";
 
 function App() {
     const primaryColor = getCssVariableValue("--primary-color");
