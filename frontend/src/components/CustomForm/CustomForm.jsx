@@ -3,11 +3,12 @@ import CustomButton from "../CustomButton/CustomButton.jsx";
 import CustomPasswordInput from "../CustomPasswordInput/CustomPasswordInput.jsx";
 import CustomInput from "../CustomInput/CustomInput.jsx";
 import "./CustomForm.css";
+import {useNavigate} from "react-router-dom";
 
 function CustomForm({initialValues, onSubmit, fields, buttonConfig}) {
     const [formValues, setFormValues] = useState(initialValues);
     const [errors, setErrors] = useState({});
-
+    const navigate = useNavigate();
     const handleChange = (name, value) => {
         setFormValues((prevValues) => ({
             ...prevValues,
@@ -75,7 +76,15 @@ function CustomForm({initialValues, onSubmit, fields, buttonConfig}) {
                     <CustomButton
                         buttonText={element.buttonText}
                         color={element.buttonColor}
-                        isFullWidth={element.buttonIsFullWidth}/>
+                        isFullWidth={element.buttonIsFullWidth}
+                        onClick={(event) => {
+                            if (element.buttonText === "Back") {
+                                event.preventDefault();
+                                navigate(element.link);
+                            }
+                        }}
+                    />
+
                 ))}
             </div>
         </form>

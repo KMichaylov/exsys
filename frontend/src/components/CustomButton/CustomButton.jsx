@@ -2,7 +2,7 @@ import {Button} from '@mantine/core';
 import React from 'react';
 import "./CustomButton.css"
 
-function CustomButton({color, isFullWidth = false, buttonText}) {
+function CustomButton({color, isFullWidth = false, buttonText, onClick}) {
     return (
         <Button
             variant="filled"
@@ -12,6 +12,7 @@ function CustomButton({color, isFullWidth = false, buttonText}) {
             type="submit"
             color={color}
             className="custom-button"
+            onClick={onClick}
         >
             {buttonText}
         </Button>

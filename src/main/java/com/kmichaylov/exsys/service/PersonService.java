@@ -44,7 +44,7 @@ public class PersonService {
         person.setEmail(registrationDTO.getEmail());
         person.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
         person.setRole(Role.STUDENT);
-        if (personDAO.findByEmail(registrationDTO.getEmail()).isPresent()) {
+        if (!personDAO.findByEmail(registrationDTO.getEmail()).isPresent()) {
             personDAO.save(person);
             System.out.println("Successfully registered the person");
             return Optional.of(person);
