@@ -5,7 +5,7 @@ import {isEmail, isNotEmpty, matches} from "@mantine/form";
  */
 
 const validateName = (value) => {
-    if (!matches(/^[A-Za-z' ]+$/)(value)) {
+    if (matches(/^[A-Za-z' ]+$/)(value)) {
         return 'This name is invalid, use only letters and apostrophes.';
     }
     if (isNotEmpty()(value)) {
@@ -15,7 +15,7 @@ const validateName = (value) => {
 };
 
 const validateEmail = (value) => {
-    if (!isEmail('The provided email is invalid, please check for mistakes and try again.')(value)) {
+    if (isEmail('The provided email is invalid, please check for mistakes and try again.')(value)) {
         return 'The provided email is invalid, please check for mistakes and try again.';
     }
     if (isNotEmpty()(value)) {
@@ -25,7 +25,7 @@ const validateEmail = (value) => {
 };
 
 const validatePassword = (value) => {
-    if (!matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{10,}$/)(value)) {
+    if (matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{10,}$/)(value)) {
         return "The password should have at least 10 symbols, including small and big letters, alongside at least 1 number.";
     }
     if (isNotEmpty()(value)) {
@@ -38,7 +38,7 @@ const validatePasswordConfirmation = (value, formValues) => {
     if (isNotEmpty()(value)) {
         return 'This field cannot be empty';
     }
-    return value === formValues.password ? null : 'Passwords do not match.';
+    return value === formValues.password ? null : 'The confirmation password does not match the previously typed one.';
 };
 
 // Configuration objects

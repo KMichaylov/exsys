@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import CustomButton from "../CustomButton/CustomButton.jsx";
 import CustomPasswordInput from "../CustomPasswordInput/CustomPasswordInput.jsx";
 import CustomInput from "../CustomInput/CustomInput.jsx";
 import "./CustomForm.css";
 
-function CustomForm({ initialValues, onSubmit, fields, buttonConfig }) {
+function CustomForm({initialValues, onSubmit, fields, buttonConfig}) {
     const [formValues, setFormValues] = useState(initialValues);
     const [errors, setErrors] = useState({});
 
@@ -43,7 +43,7 @@ function CustomForm({ initialValues, onSubmit, fields, buttonConfig }) {
     return (
         <form onSubmit={handleSubmit}>
             {Object.values(fields).map((field) => (
-                <div key={field.name} style={{ marginBottom: '1rem' }}>
+                <div key={field.name} style={{marginBottom: '1rem'}}>
                     {field.type === 'text' && (
                         <div className="input-box">
                             <CustomInput
@@ -51,7 +51,7 @@ function CustomForm({ initialValues, onSubmit, fields, buttonConfig }) {
                                 placeholder={field.placeholder}
                                 value={formValues[field.name] || ''}
                                 onChange={(event) => handleChange(field.name, event.currentTarget.value)}
-                                error={errors[field.name]} // Pass error message
+                                error={errors[field.name]}
                                 required={field.withAsterisk}
                             />
                         </div>
@@ -63,7 +63,7 @@ function CustomForm({ initialValues, onSubmit, fields, buttonConfig }) {
                                 placeholder={field.placeholder}
                                 value={formValues[field.name] || ''}
                                 onChange={(event) => handleChange(field.name, event.currentTarget.value)}
-                                error={errors[field.name]} // Pass error message
+                                error={errors[field.name]}
                                 required={field.withAsterisk}
                             />
                         </div>
