@@ -2,16 +2,16 @@ import './variables.css';
 import './App.css';
 import NavigationBar from "./components/NavigationBar/NavigationBar.jsx";
 import Logo from "./components/Logo/Logo.jsx";
-import {MantineProvider} from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
 import CustomForm from "./components/CustomForm/CustomForm.jsx";
 import getCssVariableValue from "./utils/getcsscolor.js";
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '@mantine/core/styles.css';
-import {loginConfig} from "./utils/formConfigurer.js";
+import { loginConfig } from "./utils/formConfigurer.js";
 
 function App() {
     const primaryColor = getCssVariableValue("--primary-color");
-    console.log(primaryColor);
+    const navigate = useNavigate();
 
     const buttonConfig = [{
         buttonText: "Submit",
@@ -19,17 +19,27 @@ function App() {
         buttonIsFullWidth: true,
         link: "/homepage-student"
     }]
+
+    const handleFormSubmit = (isValid, formValues) => {
+        if (isValid) {
+            console.log('Form submitted with values:', formValues);
+            navigate(buttonConfig[0].link);
+        } else {
+            console.log('Form validation failed');
+        }
+    };
+
     return (
         <MantineProvider>
-            <NavigationBar/>
-            <Logo/>
+            <NavigationBar />
+            <Logo />
             <div className="wrapper">
                 <div className="wrapper-registration">
                     <CustomForm
                         fields={loginConfig}
-                        onSubmit={() => "0"}
+                        onSubmit={handleFormSubmit}
                         buttonConfig={buttonConfig}
-                        initialValues={{email: '', password: ''}}
+                        initialValues={{ email: '', password: '' }}
                     />
                     <span>Don't have an account? <Link to="/register">Register here</Link></span>
                 </div>
