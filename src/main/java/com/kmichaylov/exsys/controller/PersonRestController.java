@@ -3,6 +3,7 @@ package com.kmichaylov.exsys.controller;
 import com.kmichaylov.exsys.dto.LoginDTO;
 import com.kmichaylov.exsys.dto.RegistrationDTO;
 import com.kmichaylov.exsys.enumeration.Role;
+import com.kmichaylov.exsys.exception.PersonAlreadyRegistered;
 import com.kmichaylov.exsys.exception.PersonNotFoundException;
 import com.kmichaylov.exsys.model.Person;
 import com.kmichaylov.exsys.service.PersonService;
@@ -22,10 +23,13 @@ public class PersonRestController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Person> register(@RequestBody RegistrationDTO registrationDTO) {
+    public ResponseEntity<String> register(@RequestBody RegistrationDTO registrationDTO) {
 
-        Person registeredPerson = personService.registerPerson(registrationDTO);
-        return ResponseEntity.ok(registeredPerson);
+        Optional<Person> registeredPerson = personService.registerPerson(registrationDTO);
+        if (registeredPerson.isPresent()) {
+            return ResponseEntity.ok("Successful registration");
+        }
+        throw new PersonAlreadyRegistered("The student is already registered");
 
     }
 

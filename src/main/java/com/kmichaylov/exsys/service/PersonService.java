@@ -38,16 +38,19 @@ public class PersonService {
      * @param registrationDTO the dto object of the person to be registered
      * @return the created person object from the dto
      */
-    public Person registerPerson(RegistrationDTO registrationDTO) {
+    public Optional<Person> registerPerson(RegistrationDTO registrationDTO) {
         Person person = new Person();
         person.setFullName(registrationDTO.getFullName());
         person.setEmail(registrationDTO.getEmail());
         person.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
         person.setRole(Role.STUDENT);
-
-        personDAO.save(person);
-        System.out.println("Successfully registered the person");
-        return person;
+        if (personDAO.findByEmail(registrationDTO.getEmail()).isPresent()) {
+            personDAO.save(person);
+            System.out.println("Successfully registered the person");
+            return Optional.of(person);
+        }
+        System.out.println("Such a person is already registered");
+        return Optional.empty();
     }
 
     /**
@@ -60,13 +63,12 @@ public class PersonService {
     public Optional<Person> login(LoginDTO loginDTO) {
         String email = loginDTO.getEmail();
         String passwordInput = loginDTO.getPassword();
-        String passwordFromDB = personDAO.findByEmail(email).getPassword();
-        Person person = personDAO.findByEmail(email);
-        System.out.println(passwordInput);
-        System.out.println(passwordFromDB);
-        System.out.println(email);
-        if (!email.isEmpty() && passwordEncoder.matches(passwordInput, passwordFromDB)) {
-            return Optional.of(person);
+        if (personDAO.findByEmail(email).isPresent()) {
+            Optional<Person> personEmailFromDB = personDAO.findByEmail(email);
+            String passwordFromDB = personEmailFromDB.get().getPassword();
+            if (!email.isEmpty() && passwordEncoder.matches(passwordInput, passwordFromDB)) {
+                return personEmailFromDB;
+            }
         }
 
         return Optional.empty();

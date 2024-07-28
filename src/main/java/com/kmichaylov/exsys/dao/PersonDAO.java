@@ -3,6 +3,7 @@ package com.kmichaylov.exsys.dao;
 import com.kmichaylov.exsys.model.Person;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Interface for Data Access Object (DAO) to manage Person entities.
@@ -23,7 +24,7 @@ public interface PersonDAO {
      * @param id the ID of the person to find
      * @return the found person entity, or null if not found
      */
-    Person findById(String id);
+    Optional<Person> findById(String id);
 
     /**
      * Retrieves all person entities.
@@ -47,7 +48,7 @@ public interface PersonDAO {
      * @param email of the person
      * @return the person entity with the given email
      */
-    Person findByEmail(String email);
+    Optional<Person> findByEmail(String email);
 
     /**
      * Updates an existing person entity.

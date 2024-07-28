@@ -29,4 +29,14 @@ public class PersonRestExceptionHandler {
 
         return new ResponseEntity<PersonErrorResponse>(errorResponse, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<PersonErrorResponse> handleException(PersonAlreadyRegistered ex) {
+        PersonErrorResponse errorResponse = new PersonErrorResponse();
+        errorResponse.setStatusCode(HttpStatus.CONFLICT.value());
+        errorResponse.setMessage(ex.getMessage());
+        errorResponse.setTimestamp(System.currentTimeMillis());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
 }

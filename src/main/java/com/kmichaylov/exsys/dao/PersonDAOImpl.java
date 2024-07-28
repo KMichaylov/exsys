@@ -2,12 +2,14 @@ package com.kmichaylov.exsys.dao;
 
 import com.kmichaylov.exsys.model.Person;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Implementation of the PersonDAO interface using JPA EntityManager.
@@ -57,8 +59,8 @@ public class PersonDAOImpl implements PersonDAO {
      */
     @Override
     @Transactional
-    public Person findById(String person_id) {
-        return entityManager.find(Person.class, person_id);
+    public Optional<Person> findById(String person_id) {
+        return Optional.ofNullable(entityManager.find(Person.class, person_id));
     }
 
     /**
@@ -88,14 +90,19 @@ public class PersonDAOImpl implements PersonDAO {
 
     /**
      * Find the person with the corresponding email address.
+     *
      * @param email of the person
      * @return the person entity
      */
     @Override
-    public Person findByEmail(String email) {
-        TypedQuery<Person> query = entityManager.createQuery("FROM Person WHERE email=:email", Person.class);
-        query.setParameter("email", email);
-        return query.getSingleResult();
+    public Optional<Person> findByEmail(String email) {
+        try {
+            TypedQuery<Person> query = entityManager.createQuery("FROM Person WHERE email=:email", Person.class);
+            query.setParameter("email", email);
+            return Optional.ofNullable(query.getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
     }
 
     /**
