@@ -8,7 +8,7 @@ const validateName = (value) => {
     if (!matches(/^[A-Za-z' ]+$/)(value)) {
         return 'This name is invalid, use only letters and apostrophes.';
     }
-    if (!isNotEmpty()(value)) {
+    if (isNotEmpty()(value)) {
         return 'This field cannot be empty';
     }
     return null;
@@ -18,7 +18,7 @@ const validateEmail = (value) => {
     if (!isEmail('The provided email is invalid, please check for mistakes and try again.')(value)) {
         return 'The provided email is invalid, please check for mistakes and try again.';
     }
-    if (!isNotEmpty()(value)) {
+    if (isNotEmpty()(value)) {
         return 'This field cannot be empty';
     }
     return null;
@@ -28,14 +28,14 @@ const validatePassword = (value) => {
     if (!matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{10,}$/)(value)) {
         return "The password should have at least 10 symbols, including small and big letters, alongside at least 1 number.";
     }
-    if (!isNotEmpty()(value)) {
+    if (isNotEmpty()(value)) {
         return 'This field cannot be empty';
     }
     return null;
 };
 
 const validatePasswordConfirmation = (value, formValues) => {
-    if (!isNotEmpty()(value)) {
+    if (isNotEmpty()(value)) {
         return 'This field cannot be empty';
     }
     return value === formValues.password ? null : 'Passwords do not match.';
@@ -73,8 +73,7 @@ export const registrationConfig = {
         label: 'Confirm Password',
         placeholder: 'Confirm your password',
         withAsterisk: true,
-        validation: validatePassword
-        // validation: validatePasswordConfirmation(value, formValues),
+        validation: validatePasswordConfirmation
     },
 };
 
