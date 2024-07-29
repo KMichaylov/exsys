@@ -9,7 +9,7 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "person_id", updatable = false, nullable = false)
-    private String personId;
+    private Integer personId;
     @Column(name = "full_name")
     private String fullName;
     @Column(name = "email")
@@ -55,11 +55,11 @@ public class Person {
         this.password = password;
     }
 
-    public String getPersonId() {
+    public Integer getPersonId() {
         return personId;
     }
 
-    public void setPersonId(String personId) {
+    public void setPersonId(Integer personId) {
         this.personId = personId;
     }
 

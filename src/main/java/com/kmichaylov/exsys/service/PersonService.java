@@ -5,6 +5,7 @@ import com.kmichaylov.exsys.dto.LoginDTO;
 import com.kmichaylov.exsys.dto.RegistrationDTO;
 import com.kmichaylov.exsys.enumeration.Role;
 import com.kmichaylov.exsys.model.Person;
+import com.kmichaylov.exsys.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,17 +19,17 @@ import java.util.Optional;
 @Service
 public class PersonService {
 
-    private final PersonDAO personDAO;
+    private final PersonRepository personRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     /**
-     * Constructor to initialize the personDAO
+     * Constructor to initialize the personRepository
      *
-     * @param personDAO
+     * @param personRepository
      */
     @Autowired
-    public PersonService(PersonDAO personDAO, BCryptPasswordEncoder passwordEncoder) {
-        this.personDAO = personDAO;
+    public PersonService(PersonRepository personRepository, BCryptPasswordEncoder passwordEncoder) {
+        this.personRepository = personRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -44,8 +45,8 @@ public class PersonService {
         person.setEmail(registrationDTO.getEmail());
         person.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
         person.setRole(Role.STUDENT);
-        if (!personDAO.findByEmail(registrationDTO.getEmail()).isPresent()) {
-            personDAO.save(person);
+        if (!personRepository.findByEmail(registrationDTO.getEmail()).isPresent()) {
+            personRepository.save(person);
             System.out.println("Successfully registered the person");
             return Optional.of(person);
         }
@@ -63,8 +64,8 @@ public class PersonService {
     public Optional<Person> login(LoginDTO loginDTO) {
         String email = loginDTO.getEmail();
         String passwordInput = loginDTO.getPassword();
-        if (personDAO.findByEmail(email).isPresent()) {
-            Optional<Person> personEmailFromDB = personDAO.findByEmail(email);
+        if (personRepository.findByEmail(email).isPresent()) {
+            Optional<Person> personEmailFromDB = personRepository.findByEmail(email);
             String passwordFromDB = personEmailFromDB.get().getPassword();
             if (!email.isEmpty() && passwordEncoder.matches(passwordInput, passwordFromDB)) {
                 return personEmailFromDB;
