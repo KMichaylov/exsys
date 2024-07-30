@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository Interface for managing the person entities/models.
+ */
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Integer> {
 
