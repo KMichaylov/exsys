@@ -15,4 +15,102 @@ public class StudentAnswer {
 
     @Column(name = "score")
     private double score;
+
+    @ManyToOne
+    @JoinColumn(name = "exam_id")
+    private Exam exam;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Person person;
+
+    @OneToOne
+    @JoinColumn(name = "answer_id")
+    private Answer answer;
+
+    @OneToOne
+    @JoinColumn(name = "question_id")
+    private Question question;
+
+    public StudentAnswer() {
+    }
+
+    public StudentAnswer(String studentAnswer, double score, Exam exam, Person person, Answer answer, Question question) {
+        this.studentAnswer = studentAnswer;
+        this.score = score;
+        this.exam = exam;
+        this.person = person;
+        this.answer = answer;
+        this.question = question;
+    }
+
+
+    public int getStudentAnswerId() {
+        return studentAnswerId;
+    }
+
+    public void setStudentAnswerId(int studentAnswerId) {
+        this.studentAnswerId = studentAnswerId;
+    }
+
+    public String getStudentAnswer() {
+        return studentAnswer;
+    }
+
+    public void setStudentAnswer(String studentAnswer) {
+        this.studentAnswer = studentAnswer;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public Exam getExam() {
+        return exam;
+    }
+
+    public void setExam(Exam exam) {
+        this.exam = exam;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    @Override
+    public String toString() {
+        return "StudentAnswer{" +
+                "studentAnswerId=" + studentAnswerId +
+                ", studentAnswer='" + studentAnswer + '\'' +
+                ", score=" + score +
+                ", exam=" + exam +
+                ", person=" + person +
+                ", answer=" + answer +
+                ", question=" + question +
+                '}';
+    }
 }

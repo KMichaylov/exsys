@@ -1,11 +1,12 @@
 package com.kmichaylov.exsys.model;
 
 import jakarta.persistence.*;
+import org.hibernate.mapping.Join;
 
 import java.util.List;
 
 @Entity
-@Table(name = "exam")
+@Table(name = "course")
 public class Course {
     @Id
     @Column(name = "course_id")
@@ -18,15 +19,16 @@ public class Course {
     @Column(name = "course_year", length = 4)
     private String courseYear;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany
     private List<Exam> exams;
 
     public Course() {
     }
 
-    public Course(String courseName, String courseYear) {
+    public Course(String courseName, String courseYear, List<Exam> exams) {
         this.courseName = courseName;
         this.courseYear = courseYear;
+        this.exams = exams;
     }
 
     public int getCourseId() {
@@ -41,14 +43,6 @@ public class Course {
         return courseName;
     }
 
-    public List<Exam> getExams() {
-        return exams;
-    }
-
-    public void setExams(List<Exam> exams) {
-        this.exams = exams;
-    }
-
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
@@ -61,6 +55,13 @@ public class Course {
         this.courseYear = courseYear;
     }
 
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
+    }
 
     @Override
     public String toString() {
@@ -68,6 +69,7 @@ public class Course {
                 "courseId=" + courseId +
                 ", courseName='" + courseName + '\'' +
                 ", courseYear='" + courseYear + '\'' +
+                ", exams=" + exams +
                 '}';
     }
 }

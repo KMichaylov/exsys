@@ -4,9 +4,10 @@ import com.kmichaylov.exsys.enumeration.ExamType;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "course")
+@Table(name = "exam")
 public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,10 +30,22 @@ public class Exam {
     @Column(name = "total_points")
     private double totalPoints;
 
+    @ManyToOne
+    private Course course;
+
+    @OneToMany
+    private List<StudentAnswer> studentAnswers;
+
+    @OneToMany
+    private List<Question> questions;
+
+    @OneToMany
+    private List<StudentExam> studentExams;
+
     public Exam() {
     }
 
-    public Exam(int courseId, Date date, String duration, ExamType type, String description, double pointsToPass, double totalPoints) {
+    public Exam(int courseId, Date date, String duration, ExamType type, String description, double pointsToPass, double totalPoints, Course course, List<StudentAnswer> studentAnswers, List<Question> questions, List<StudentExam> studentExams) {
         this.courseId = courseId;
         this.date = date;
         this.duration = duration;
@@ -40,6 +53,10 @@ public class Exam {
         this.description = description;
         this.pointsToPass = pointsToPass;
         this.totalPoints = totalPoints;
+        this.course = course;
+        this.studentAnswers = studentAnswers;
+        this.questions = questions;
+        this.studentExams = studentExams;
     }
 
     public int getExamId() {
@@ -106,6 +123,38 @@ public class Exam {
         this.totalPoints = totalPoints;
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public List<StudentAnswer> getStudentAnswers() {
+        return studentAnswers;
+    }
+
+    public void setStudentAnswers(List<StudentAnswer> studentAnswers) {
+        this.studentAnswers = studentAnswers;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+    public List<StudentExam> getStudentExams() {
+        return studentExams;
+    }
+
+    public void setStudentExams(List<StudentExam> studentExams) {
+        this.studentExams = studentExams;
+    }
+
     @Override
     public String toString() {
         return "Exam{" +
@@ -117,6 +166,10 @@ public class Exam {
                 ", description='" + description + '\'' +
                 ", pointsToPass=" + pointsToPass +
                 ", totalPoints=" + totalPoints +
+                ", course=" + course +
+                ", studentAnswers=" + studentAnswers +
+                ", questions=" + questions +
+                ", studentExams=" + studentExams +
                 '}';
     }
 }
