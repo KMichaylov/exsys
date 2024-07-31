@@ -13,8 +13,9 @@ public class Exam {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int examId;
 
-    @Column(name = "course_id")
-    private int courseId;
+    @ManyToOne
+    @JoinColumn(name = "course_id", nullable = false)
+    private Course course;
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
     private Date date;
@@ -30,8 +31,6 @@ public class Exam {
     @Column(name = "total_points")
     private double totalPoints;
 
-    @ManyToOne
-    private Course course;
 
     @OneToMany
     private List<StudentAnswer> studentAnswers;
@@ -45,8 +44,7 @@ public class Exam {
     public Exam() {
     }
 
-    public Exam(int courseId, Date date, String duration, ExamType type, String description, double pointsToPass, double totalPoints, Course course, List<StudentAnswer> studentAnswers, List<Question> questions, List<StudentExam> studentExams) {
-        this.courseId = courseId;
+    public Exam(Date date, String duration, ExamType type, String description, double pointsToPass, double totalPoints, Course course, List<StudentAnswer> studentAnswers, List<Question> questions, List<StudentExam> studentExams) {
         this.date = date;
         this.duration = duration;
         this.type = type;
@@ -67,13 +65,6 @@ public class Exam {
         this.examId = examId;
     }
 
-    public int getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
-    }
 
     public Date getDate() {
         return date;
@@ -159,7 +150,6 @@ public class Exam {
     public String toString() {
         return "Exam{" +
                 "examId=" + examId +
-                ", courseId=" + courseId +
                 ", date=" + date +
                 ", duration='" + duration + '\'' +
                 ", type=" + type +

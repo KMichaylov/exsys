@@ -19,7 +19,7 @@ public class Course {
     @Column(name = "course_year", length = 4)
     private String courseYear;
 
-    @OneToMany
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Exam> exams;
 
     public Course() {
