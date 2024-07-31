@@ -17,7 +17,7 @@ public class ExamDTO {
 
     private Date date;
 
-    private String duration;
+    private int duration;
 
     private ExamType type;
 
@@ -44,11 +44,11 @@ public class ExamDTO {
         this.date = date;
     }
 
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 

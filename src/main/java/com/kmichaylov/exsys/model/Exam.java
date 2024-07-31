@@ -20,7 +20,7 @@ public class Exam {
     @Temporal(TemporalType.DATE)
     private Date date;
     @Column(name = "duration")
-    private String duration;
+    private int duration;
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private ExamType type;
@@ -30,6 +30,10 @@ public class Exam {
     private double pointsToPass;
     @Column(name = "total_points")
     private double totalPoints;
+    @Column(name = "is_submitted")
+    private boolean isSubmitted;
+    @Column(name = "is_graded")
+    private boolean isGraded;
 
 
     @OneToMany
@@ -44,14 +48,16 @@ public class Exam {
     public Exam() {
     }
 
-    public Exam(Date date, String duration, ExamType type, String description, double pointsToPass, double totalPoints, Course course, List<StudentAnswer> studentAnswers, List<Question> questions, List<StudentExam> studentExams) {
+    public Exam(Course course, Date date, int duration, ExamType type, String description, double pointsToPass, double totalPoints, boolean isSubmitted, boolean isGraded, List<StudentAnswer> studentAnswers, List<Question> questions, List<StudentExam> studentExams) {
+        this.course = course;
         this.date = date;
         this.duration = duration;
         this.type = type;
         this.description = description;
         this.pointsToPass = pointsToPass;
         this.totalPoints = totalPoints;
-        this.course = course;
+        this.isSubmitted = isSubmitted;
+        this.isGraded = isGraded;
         this.studentAnswers = studentAnswers;
         this.questions = questions;
         this.studentExams = studentExams;
@@ -65,6 +71,13 @@ public class Exam {
         this.examId = examId;
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 
     public Date getDate() {
         return date;
@@ -74,11 +87,11 @@ public class Exam {
         this.date = date;
     }
 
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 
@@ -114,12 +127,20 @@ public class Exam {
         this.totalPoints = totalPoints;
     }
 
-    public Course getCourse() {
-        return course;
+    public boolean isSubmitted() {
+        return isSubmitted;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setSubmitted(boolean submitted) {
+        isSubmitted = submitted;
+    }
+
+    public boolean isGraded() {
+        return isGraded;
+    }
+
+    public void setGraded(boolean graded) {
+        isGraded = graded;
     }
 
     public List<StudentAnswer> getStudentAnswers() {
@@ -150,16 +171,18 @@ public class Exam {
     public String toString() {
         return "Exam{" +
                 "examId=" + examId +
+                ", courseId=" + (course != null ? course.getCourseId() : "null") +
                 ", date=" + date +
-                ", duration='" + duration + '\'' +
+                ", duration=" + duration +
                 ", type=" + type +
                 ", description='" + description + '\'' +
                 ", pointsToPass=" + pointsToPass +
                 ", totalPoints=" + totalPoints +
-                ", course=" + course +
-                ", studentAnswers=" + studentAnswers +
-                ", questions=" + questions +
-                ", studentExams=" + studentExams +
+                ", isSubmitted=" + isSubmitted +
+                ", isGraded=" + isGraded +
+                ", studentAnswers=" + (studentAnswers != null ? studentAnswers.size() : "null") +
+                ", questions=" + (questions != null ? questions.size() : "null") +
+                ", studentExams=" + (studentExams != null ? studentExams.size() : "null") +
                 '}';
     }
 }
