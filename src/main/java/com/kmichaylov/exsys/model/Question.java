@@ -16,6 +16,7 @@ public class Question {
     @Column(name = "question_body")
     private String questionBody;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "question_type")
     private QuestionType questionType;
 
@@ -23,11 +24,11 @@ public class Question {
     @JoinColumn(name = "parent_question_id")
     private Question parentQuestion;
 
-    @OneToMany
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answers;
 
-    @OneToOne
-    private StudentAnswer studentAnswers;
+    @OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
+    private StudentAnswer studentAnswer;
 
     @Column(name = "points")
     private double points;
@@ -73,6 +74,22 @@ public class Question {
         this.parentQuestion = parentQuestion;
     }
 
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
+
+    public StudentAnswer getStudentAnswer() {
+        return studentAnswer;
+    }
+
+    public void setStudentAnswer(StudentAnswer studentAnswer) {
+        this.studentAnswer = studentAnswer;
+    }
+
     public double getPoints() {
         return points;
     }
@@ -90,6 +107,4 @@ public class Question {
                 ", points=" + points +
                 '}';
     }
-
-
 }
