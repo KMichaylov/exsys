@@ -34,7 +34,7 @@ CREATE TABLE question
     question_id        SERIAL PRIMARY KEY,
     exam_id            INT,
     question_body      VARCHAR                                                                                      NOT NULL,
-    question_type      VARCHAR(15) CHECK (question_type IN ('SINGLE_CORRECT', 'MULTIPLE_CORRECT', 'OPEN_QUESTION')) NOT NULL,
+    question_type      VARCHAR(16) CHECK (question_type IN ('SINGLE_CORRECT', 'MULTIPLE_CORRECT', 'OPEN_QUESTION')) NOT NULL,
     points             REAL,
     parent_question_id INT,
     FOREIGN KEY (exam_id) REFERENCES exam (exam_id),
