@@ -35,7 +35,6 @@ public class Exam {
     @Column(name = "is_graded")
     private boolean isGraded;
 
-
     @OneToMany
     private List<StudentAnswer> studentAnswers;
 

@@ -32,6 +32,7 @@ public class StudentAnswer {
     @JoinColumn(name = "question_id")
     private Question question;
 
+
     public StudentAnswer() {
     }
 
@@ -107,10 +108,8 @@ public class StudentAnswer {
                 "studentAnswerId=" + studentAnswerId +
                 ", studentAnswer='" + studentAnswer + '\'' +
                 ", score=" + score +
-                ", exam=" + exam +
-                ", person=" + person +
-                ", answer=" + answer +
-                ", question=" + question +
+                ", questionId=" + (question != null ? question.getQuestionId() : "null") +
+                ", answerId=" + (answer != null ? answer.getAnswerId() : "null") +
                 '}';
     }
 }

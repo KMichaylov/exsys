@@ -1,12 +1,16 @@
 package com.kmichaylov.exsys.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.kmichaylov.exsys.enumeration.QuestionType;
 import jakarta.persistence.*;
 
 import java.util.List;
 
+
 @Entity
 @Table(name = "question")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "questionId")
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,19 +20,20 @@ public class Question {
     @Column(name = "question_body")
     private String questionBody;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "question_type")
+    @Enumerated(EnumType.STRING)
     private QuestionType questionType;
 
     @ManyToOne
     @JoinColumn(name = "parent_question_id")
     private Question parentQuestion;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question")
     private List<Answer> answers;
 
-    @OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
-    private StudentAnswer studentAnswer;
+    @OneToOne(mappedBy = "question")
+    @JoinColumn(name = "question_id")
+    private StudentAnswer studentAnswers;
 
     @Column(name = "points")
     private double points;
@@ -82,14 +87,6 @@ public class Question {
         this.answers = answers;
     }
 
-    public StudentAnswer getStudentAnswer() {
-        return studentAnswer;
-    }
-
-    public void setStudentAnswer(StudentAnswer studentAnswer) {
-        this.studentAnswer = studentAnswer;
-    }
-
     public double getPoints() {
         return points;
     }
@@ -105,6 +102,7 @@ public class Question {
                 ", questionBody='" + questionBody + '\'' +
                 ", questionType=" + questionType +
                 ", points=" + points +
+                ", parentQuestionId=" + (parentQuestion != null ? parentQuestion.getQuestionId() : "null") +
                 '}';
     }
 }
