@@ -51,5 +51,4 @@ public class ExamRestController {
         return ResponseEntity.ok(updatedExam);
     }
 
-//    @DeleteMapping("/delete-exam/")
 }
