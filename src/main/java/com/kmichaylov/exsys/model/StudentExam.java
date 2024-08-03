@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "student_exam")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "studentAnswerId")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "studentExamId")
 public class StudentExam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
