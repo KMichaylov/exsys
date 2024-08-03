@@ -1,5 +1,6 @@
 package com.kmichaylov.exsys.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.kmichaylov.exsys.enumeration.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "person")
+@JsonIgnoreProperties({"studentAnswers", "studentExams"})
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +26,10 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StudentAnswer> studentAnswers;
 
-    @OneToMany
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StudentExam> studentExams;
 
     public Person() {

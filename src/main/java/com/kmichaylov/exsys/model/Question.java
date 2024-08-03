@@ -1,6 +1,7 @@
 package com.kmichaylov.exsys.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.kmichaylov.exsys.enumeration.QuestionType;
 import jakarta.persistence.*;
@@ -37,6 +38,12 @@ public class Question {
 
     @Column(name = "points")
     private double points;
+
+    @ManyToOne
+    @JoinColumn(name = "exam_id")
+    @JsonIgnore
+    private Exam exam;
+
 
     public Question() {
     }

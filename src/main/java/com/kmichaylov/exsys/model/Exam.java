@@ -38,13 +38,13 @@ public class Exam {
     @Column(name = "is_graded")
     private boolean isGraded;
 
-    @OneToMany
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StudentAnswer> studentAnswers;
 
-    @OneToMany
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Question> questions;
 
-    @OneToMany
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StudentExam> studentExams;
 
     public Exam() {
