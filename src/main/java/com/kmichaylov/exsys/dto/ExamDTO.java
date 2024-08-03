@@ -27,6 +27,10 @@ public class ExamDTO {
 
     private double totalPoints;
 
+    private boolean isGraded;
+
+    private boolean isSubmitted;
+
 
     public Course getCourse() {
         return course;
@@ -82,5 +86,21 @@ public class ExamDTO {
 
     public void setTotalPoints(double totalPoints) {
         this.totalPoints = totalPoints;
+    }
+
+    public boolean isGraded() {
+        return isGraded;
+    }
+
+    public void setGraded(boolean graded) {
+        isGraded = graded;
+    }
+
+    public boolean isSubmitted() {
+        return isSubmitted;
+    }
+
+    public void setSubmitted(boolean submitted) {
+        isSubmitted = submitted;
     }
 }

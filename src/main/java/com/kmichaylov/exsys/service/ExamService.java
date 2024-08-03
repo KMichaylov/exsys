@@ -36,6 +36,8 @@ public class ExamService {
         exam.setDescription(examDTO.getDescription());
         exam.setPointsToPass(examDTO.getPointsToPass());
         exam.setTotalPoints(examDTO.getTotalPoints());
+        exam.setSubmitted(examDTO.isSubmitted());
+        exam.setGraded(examDTO.isGraded());
         return examRepository.save(exam);
     }
 
@@ -50,6 +52,8 @@ public class ExamService {
             existingExam.setDescription(examDTO.getDescription());
             existingExam.setPointsToPass(examDTO.getPointsToPass());
             existingExam.setTotalPoints(examDTO.getTotalPoints());
+            existingExam.setSubmitted(examDTO.isSubmitted());
+            existingExam.setGraded(examDTO.isGraded());
             return examRepository.save(existingExam);
         } else {
             throw new RuntimeException("Exam not found");
