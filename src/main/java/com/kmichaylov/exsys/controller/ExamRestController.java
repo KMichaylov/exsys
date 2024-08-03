@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("exams")
 public class ExamRestController {
 
     private ExamService examService;
@@ -19,7 +18,7 @@ public class ExamRestController {
         this.examService = examService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/exams")
     public ResponseEntity<List<Exam>> getExams() {
         List<Exam> exams = examService.findAll();
         if (exams.isEmpty()) {
@@ -29,7 +28,7 @@ public class ExamRestController {
         return ResponseEntity.ok(exams);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/exams/{id}")
     public ResponseEntity<Optional<Exam>> getExamById(@PathVariable int id) {
         Optional<Exam> exam = examService.findById(id);
 
@@ -39,13 +38,13 @@ public class ExamRestController {
         return ResponseEntity.ok(exam);
     }
 
-    @PostMapping("/add-exam")
+    @PostMapping("/exams/add-exam")
     public ResponseEntity<String> addExam(@RequestBody ExamDTO examDTO) {
         Exam addedExam = examService.addExam(examDTO);
         return ResponseEntity.ok("Exam is added successfully!");
     }
 
-    @PutMapping("/update-exam/{id}")
+    @PutMapping("/exams/update-exam/{id}")
     public ResponseEntity<Exam> updateExam(@PathVariable int id, @RequestBody ExamDTO examDTO) {
         Exam updatedExam = examService.updateExam(id, examDTO);
         return ResponseEntity.ok(updatedExam);
