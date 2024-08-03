@@ -1,12 +1,14 @@
 package com.kmichaylov.exsys.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import org.hibernate.mapping.Join;
 
 import java.util.List;
 
 @Entity
 @Table(name = "course")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "courseId")
 public class Course {
     @Id
     @Column(name = "course_id")

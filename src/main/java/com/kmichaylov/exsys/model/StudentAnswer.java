@@ -1,9 +1,13 @@
 package com.kmichaylov.exsys.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "student_answer")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "studentAnswerId")
 public class StudentAnswer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +22,12 @@ public class StudentAnswer {
 
     @ManyToOne
     @JoinColumn(name = "exam_id")
+    @JsonIgnore
     private Exam exam;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
+    @JsonIgnore
     private Person person;
 
     @OneToOne

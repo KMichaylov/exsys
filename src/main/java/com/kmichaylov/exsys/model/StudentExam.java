@@ -1,11 +1,14 @@
 package com.kmichaylov.exsys.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "student_exam")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "studentAnswerId")
 public class StudentExam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
