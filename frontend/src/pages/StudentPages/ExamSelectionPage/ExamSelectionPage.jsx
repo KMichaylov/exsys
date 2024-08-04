@@ -1,53 +1,60 @@
 import getCssVariableValue from "../../../utils/getcsscolor.js";
-import {Grid, MantineProvider, Stack, Text} from "@mantine/core";
+import { Grid, MantineProvider, Stack, Text } from "@mantine/core";
 import NavigationBar from "../../../components/NavigationBar/NavigationBar.jsx";
 import HeadingText from "../../../components/HeadingText/HeadingText.jsx";
 import SearchInput from "../../../components/SearchInput/SearchInput.jsx";
 import TextBox from "../../../components/TextBox/TextBox.jsx";
-import React from "react";
-import {Link} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Use useNavigate hook from react-router-dom
+import api from "../../../api/people.js";
 
 function ExamSelectionPage() {
     const primaryButtonColor = getCssVariableValue("--primary-button-color");
     const primaryColor = getCssVariableValue("--primary-color");
+    const [exams, setExams] = useState([]);
+    const navigate = useNavigate();
+
+    const loadExamsData = async () => {
+        try {
+            const examsData = (await api.get("/exams")).data;
+            setExams(examsData);
+            console.log(examsData);
+        } catch (err) {
+            console.error('API request failed:', err.response?.data || err.message);
+        }
+    };
+
+    useEffect(() => {
+        loadExamsData();
+    }, []);
 
     return (
         <MantineProvider>
             <div className="wrapper-home-page">
-                <NavigationBar role={"student"}/>
+                <NavigationBar role={"student"} />
                 <div className="text-header-wrapper">
-                    <HeadingText color={primaryColor} text={"CALCULUS A"} size={"h2"}/>
+                    <HeadingText color={primaryColor} text={"CALCULUS A"} size={"h2"} />
                 </div>
                 <Grid gutter="md">
-                    <Grid.Col span={6} style={{paddingRight: '5.5rem'}}>
+                    <Grid.Col span={6} style={{ paddingRight: '5.5rem' }}>
                         <Stack align="stretch">
                             <Text size={"lg"}>Exams</Text>
-                            <SearchInput placeholder={"Please enter the exam name"} label={"Exam Name"}/>
-                            <Link style={{textDecoration: 'none'}} to={"/exam-calculus-A"}><TextBox
-                                buttonText={"Go To Exam"}
-                                buttonColor={primaryButtonColor}
-                                descriptionText={"Calculus A / Resit exam \n" +
-                                    "15th January 2024 9:00 - 11:00"}/></Link>
-                            <Link style={{textDecoration: 'none'}} to={"/"}><TextBox
-                                buttonText={"Go To Exam"}
-                                buttonColor={primaryButtonColor}
-                                descriptionText={"Calculus A / Final exam \n" +
-                                    "15th November 2023 9:00 - 11:00"}/></Link>
-                            <Link style={{textDecoration: 'none'}} to={"/"}><TextBox
-                                buttonText={"Go To Exam"}
-                                buttonColor={primaryButtonColor}
-                                descriptionText={"Calculus A / Resit exam \n" +
-                                    "12th January 2021 9:00 - 11:00"}/></Link>
-                            <Link style={{textDecoration: 'none'}} to={"/"}><TextBox
-                                buttonText={"Go To Exam"}
-                                buttonColor={primaryButtonColor}
-                                descriptionText={"Calculus A / Final exam \n" +
-                                    "12th November 2022 9:00 - 11:00"}/></Link>
+                            <SearchInput placeholder={"Please enter the exam name"} label={"Exam Name"} />
+                            {exams.map(element => (
+                                <TextBox
+                                    key={element.examId}
+                                    buttonText={"Go To Exam"}
+                                    buttonColor={primaryButtonColor}
+                                    descriptionText={`${element.courseName} / ${element.type.toUpperCase()} exam ${element.date}`}
+                                    onClick={() => navigate("/exam-selection")}
+                                />
+                            ))}
                         </Stack>
                     </Grid.Col>
                 </Grid>
             </div>
-        </MantineProvider>)
+        </MantineProvider>
+    );
 }
 
-export default ExamSelectionPage
+export default ExamSelectionPage;
