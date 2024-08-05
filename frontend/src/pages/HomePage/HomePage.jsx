@@ -9,11 +9,9 @@ import CustomButton from "../../components/CustomButton/CustomButton.jsx";
 import "./HomePage.css";
 import {useNavigate} from "react-router-dom";
 import api from "../../api/people.js";
+import {primaryButtonColor, primaryColor, boxColor} from "../../utils/colorsConstants.js";
 
 function HomePage() {
-    const primaryButtonColor = getCssVariableValue("--primary-button-color");
-    const primaryColor = getCssVariableValue("--primary-color");
-    const boxColor = getCssVariableValue("--box-color");
     const [exams, setExams] = useState([]);
     const [courses, setCourses] = useState([]);
     const navigate = useNavigate();

@@ -10,9 +10,9 @@ import '@mantine/core/styles.css';
 import {loginConfig} from "./utils/formConfigurer.js";
 import axios from "axios";
 import api from "./api/people.js";
+import {primaryColor} from "./utils/colorsConstants.js";
 
 function App() {
-    const primaryColor = getCssVariableValue("--primary-color");
     const navigate = useNavigate();
 
     const buttonConfig = [{

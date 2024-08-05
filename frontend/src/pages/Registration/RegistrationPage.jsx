@@ -9,10 +9,9 @@ import {registrationConfig} from "../../utils/formConfigurer.js";
 import api from "../../api/people.js";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {primaryButtonColor, secondaryButtonColor} from "../../utils/colorsConstants.js";
 
 function RegistrationPage() {
-    const primaryButtonColor = getCssVariableValue("--primary-button-color");
-    const secondaryButtonColor = getCssVariableValue("--secondary-button-color");
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
     const [hasError, setError] = useState(false);
