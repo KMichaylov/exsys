@@ -8,7 +8,7 @@ function Question({question, hasSubquestions}) {
         <Group>
             <Text fs="italic" size={"sm"}>{`[${question.points} pts]`}</Text>
             <Text>{question.body}</Text>
-            <QuestionPossibleAnswers type={question.type} answers={question.answers}/>
+            <QuestionPossibleAnswers type={question.type} answers={question.possibleAnswers}/>
         </Group>
     </MantineProvider>);
 }
