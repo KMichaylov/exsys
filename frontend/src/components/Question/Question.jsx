@@ -1,15 +1,18 @@
-import {Group, MantineProvider, Text} from "@mantine/core";
-import {Form} from "@mantine/form";
+import {Group, MantineProvider, Space, Stack, Text} from "@mantine/core";
 import QuestionPossibleAnswers from "../QuestionPossbileAnswers/QuestionPossibleAnswers.jsx";
+import "./Question.css"
 
-
+// TODO at later iteration implement the subquestion logic
 function Question({question, hasSubquestions}) {
     return (<MantineProvider>
-        <Group>
+        <Group gap="lg">
             <Text fs="italic" size={"sm"}>{`[${question.points} pts]`}</Text>
             <Text>{question.body}</Text>
-            <QuestionPossibleAnswers type={question.type} answers={question.possibleAnswers}/>
         </Group>
+        <Stack>
+            <Space h="xs" />
+            <QuestionPossibleAnswers type={question.type} answers={question.possibleAnswers}/>
+        </Stack>
     </MantineProvider>);
 }
 

@@ -1,0 +1,10 @@
+.exam-container {
+    margin: 0 auto;
+    padding: 20px;
+}
+.button-container-exam-page{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 40px 0;
+}

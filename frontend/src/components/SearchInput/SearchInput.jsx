@@ -6,7 +6,7 @@ function SearchInput({ label, data = [], placeholder }) {
         <Select
             label={label}
             placeholder={placeholder}
-            data={data}
+            data={data} 
             searchable
             nothingFound="No options"
         />
